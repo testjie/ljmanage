@@ -5,18 +5,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
-    <!-- plugins:css -->
+    <title>浪晋的测试小讲堂后台管理系统</title>
     <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
     <link rel="stylesheet" href="../../node_modules/jqvmap/dist/jqvmap.min.css" />
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
     <link rel="stylesheet" href="../../css/style.css">
-    <!-- endinject -->
     <link rel="shortcut icon" href="../../images/favicon.png" />
+
+
 </head>
 
 <body>
@@ -34,7 +30,7 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+                            <input type="text" class="form-control bg-transparent border-0" placeholder="输入关键字以搜索" style="width:300px;">
                         </div>
                     </form>
                 </div>
@@ -165,7 +161,7 @@
                         </div>
                     </li>
                     <li class="nav-item nav-logout d-none d-lg-block">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="javascript:logout();">
                             <i class="mdi mdi-power"></i>
                         </a>
                     </li>
@@ -214,7 +210,7 @@
                         </a>
                         <div class="collapse" id="yhlist" style="">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="../user/usermanage.html">管理员列表</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link" href="../user/adminmanage.html">管理员列表</a></li> -->
                                 <li class="nav-item"> <a class="nav-link" href="../user/usermanage.html">用户列表</a></li>
                             </ul>
                         </div>
@@ -222,14 +218,14 @@
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-toggle="collapse" href="#wzlist" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title">文章管理</span>
+                            <span class="menu-title">教程管理</span>
                             <i class="menu-arrow"></i>
                             <i class="mdi mdi-calendar-text menu-icon"></i>
                         </a>
                         <div class="collapse" id="wzlist" style="">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="../article/articlemanage.html">文章列表</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="../article/articlemanage.html">新建文章</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="../article/articlemanage.html">教程列表</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="../article/articlemanage.html">新建教程</a></li>
                             </ul>
                         </div>
                     </li>
@@ -243,7 +239,7 @@
                         <div class="collapse" id="lglist" style="">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="../inspirer/inspirermanage.html">灵感列表</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">xxxx管理</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">xxxx管理</a></li> -->
                             </ul>
                         </div>
                     </li>
@@ -257,7 +253,7 @@
                         <div class="collapse" id="wtlist" style="">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="../question/quesmanage.html">问题列表</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">xxxx管理</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">xxxx管理</a></li> -->
                             </ul>
                         </div>
                     </li>
@@ -326,35 +322,27 @@
                             </div>
                         </div>
                     </div>
+
+                    <div style="text-align: center;">
+                        <label class="text-small text-danger">共1500条数据</label>
+                    </div>
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="#" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
-              <i class="mdi mdi-heart text-danger"></i> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019-2020 <a href="#" target="_blank">liuyun</a>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">liuyu
+                        <i class="mdi mdi-heart text-danger">浪晋的测试小讲堂</i>
                     </div>
                 </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
     <script src="../../vendors/js/vendor.bundle.base.js"></script>
     <script src="../../vendors/js/vendor.bundle.addons.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
     <script src="../../js/off-canvas.js"></script>
     <script src="../../js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <!-- End custom js for this page-->
 </body>
 
 </html>

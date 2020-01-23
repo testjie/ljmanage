@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>分页</title>
+    <link rel="stylesheet" type="text/css" href="css/page.css">
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/jquery.z-pager.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/usertest.js"></script>
+</head>
+
+<body style="">
+
+    <img src="http://192.168.0.103:2333/imgs?imgname=headimg.jpg" />
+    <div style="text-align: center;margin:250px auto;">
+        <div id="pager" class="pager clearfix">
+            <a class="pg-first" page-id="1"></a>
+            <a class="pg-prev" page-id="0" disabled="true"></a>
+            <span class="current" page-id="1">1</span>
+            <a page-id="2">2</a>
+            <a page-id="3">3</a>
+            <a page-id="4">4</a>
+            <a page-id="5">5</a>
+            <a page-id="6">6</a>
+            <a page-id="7">7</a>
+            <span class="els">...</span>
+            <a class="pg-next" page-id="2"></a>
+            <a class="pg-last" page-id="10"></a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $("#pager").zPager({
+            totalData: 50,
+            htmlBox: $('#wraper'),
+            btnShow: true,
+            ajaxSetData: false
+        });
+
+        function currentPage(currentPage) {
+            /*
+                触发页码数位置： Page/js/jquery.z-pager.js 64行
+            */
+            console.log("当前页码数：" + currentPage);
+        }
+    </script>
+
+</body>
+
+</html>
