@@ -110,7 +110,7 @@ $(function() {
 
 // 首页初始化方法
 function init() {
-    var url = "../../login.html"
+    var url = "../login.html"
     var token = get_info("admin_token")
     if (token == null) {
         // 跳转到首页
@@ -124,20 +124,20 @@ function init() {
         editor.customConfig.withCredentials = true
         editor.customConfig.uploadImgHooks = {
             fail: function(xhr, editor, result) {
-                alert("插入图片上失败")
+                alert("插入图片上失败");
             },
             error: function(xhr, editor) {
-                alert("插入图片报错了，请检查后端服")
+                alert("插入图片报错了，请检查后端服");
             },
             timeout: function(xhr, editor) {
-                alert("插入图片超时")
+                alert("插入图片超时");
             },
             customInsert: function(insertImg, result, editor) {
-                var url = result.data // 图片地址
-                insertImg(get_img_url(url)) // 插入图片
+                var url = result.data; // 图片地址
+                insertImg(get_img_url(url)); // 插入图片
             }
         }
     }
-    editor.create()
-    return editor
+    editor.create();
+    return editor;
 }

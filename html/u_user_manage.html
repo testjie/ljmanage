@@ -31,7 +31,8 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="输入关键字以搜索" style="width:300px;">
+                            <input type="text" class="form-control bg-transparent border-0" id="nickname_search" placeholder="输入用户名搜索" style="width:300px;">
+                            <button class="btn btn-gradient-danger btn-lg" id="search">搜索</button>
                         </div>
                     </form>
                 </div>
@@ -218,6 +219,20 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link collapsed" data-toggle="collapse" href="#lbtlist" aria-expanded="false" aria-controls="ui-basic">
+                            <span class="menu-title">轮播图管理</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-calendar-text menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="lbtlist" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="rotation_chart_manage.html">轮播图管理</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="test_tutorial_new.html">新增轮播图</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link collapsed" data-toggle="collapse" href="#jclist" aria-expanded="false" aria-controls="ui-basic">
                             <span class="menu-title">教程管理</span>
                             <i class="menu-arrow"></i>
@@ -311,7 +326,7 @@
                                         <thead>
                                             <tr>
                                                 <th>用户</th>
-                                                <th>姓名</th>
+                                                <th>昵称</th>
                                                 <th>性别</th>
                                                 <th>电话</th>
                                                 <th>工作</th>

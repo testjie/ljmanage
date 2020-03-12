@@ -114,7 +114,7 @@ $(function() {
 
 // 首页初始化方法
 function init() {
-    var url = "../../login.html"
+    var url = "../login.html"
     var token = get_info("admin_token")
     if (token == null) {
         // 跳转到首页

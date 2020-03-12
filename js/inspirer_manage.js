@@ -51,7 +51,7 @@ $(function() {
 
 // 首页初始化方法
 function init() {
-    var url = "../../login.html"
+    var url = "../login.html"
     var token = get_info("admin_token")
     if (token == null) {
         // 跳转到首页
@@ -79,8 +79,8 @@ function init_tables(page) {
                 var total = str.data.inspirnum;
                 for (var i = 0; i < datas.length; i++) {
                     var id = replace_null(datas[i].id);
-                    var title = replace_null(datas[i].title);
-                    var content = replace_null(datas[i].content);
+                    // var title = cutstr(replace_null(datas[i].title), 30);
+                    var content = cutstr(replace_null(datas[i].content), 30);
                     var author = replace_null(datas[i].author);
                     var goods = replace_null(datas[i].goods);
                     var collections = replace_null(datas[i].collections);
@@ -96,8 +96,8 @@ function init_tables(page) {
 
                     var c = '<tr>' +
                         '<td>' + id + '</td>' +
-                        '<td>' + title + '</td>' +
-                        '<td width="400" style="word-wrap: break-word">' + content + '</td>' +
+                        '<td width="400px;">' + content + '</td>' +
+                        // '<td width="400" style="word-wrap: break-word">' + content + '</td>' +
                         '<td>' + author + '</td>' +
                         '<td>' + goods + '</td>' +
                         '<td>' + collections + '</td>' +
@@ -105,7 +105,7 @@ function init_tables(page) {
                         '<th>' + status + '</th>' +
                         '<td>' +
                         '<label class="badge badge-danger">禁用</label>' +
-                        '<label class="badge badge-danger" onclick="inspir_delete(' + id + ')">删除</label>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="deletes(' + id + ',\'/inspirdelete\')">删除</label>' +
                         '</td>' +
                         '</tr>';
 
@@ -141,33 +141,4 @@ function compute_pagenum(id) {
     }
     $("#pre").attr("onclick", "init_tables(" + pres + ")")
     $("#next").attr("onclick", "init_tables(" + next + ")")
-}
-
-// 删除灵感
-function inspir_delete(id) {
-    var ids = [id];
-    var url = get_url("/inspirdelete");
-    var datas = get_json({ "dlist": ids });
-    alert(datas)
-    $.ajax({
-        type: 'post',
-        url: url,
-        headers: get_headers(),
-        datas: datas,
-        xhrFields: { withCredentials: true },
-        crossDomain: true,
-        success: function(str) { //返回json结果
-            if (str.status == 200) {
-                // 成功
-                alert("删除成功！");
-                reload_current_page();
-            } else {
-                alert(str.msg);
-            }
-        },
-        fail: function(err, status) {
-            alert(err.data);
-            console.log(err);
-        }
-    });
 }

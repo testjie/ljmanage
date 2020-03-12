@@ -53,7 +53,7 @@ $(function() {
 
 // 首页初始化方法
 function init() {
-    var url = "../../login.html"
+    var url = "../login.html"
     var token = get_info("admin_token")
     if (token == null) {
         // 跳转到首页
@@ -80,12 +80,12 @@ function init_tables(page) {
                 var datas = str.data.articlelist;
                 for (var i = 0; i < datas.length; i++) {
                     var id = replace_null(datas[i].id);
-                    var title = replace_null(datas[i].title);
-                    var brief = replace_null(datas[i].brief);
+                    var title = cutstr(replace_null(datas[i].title), 30);
+                    var brief = cutstr(replace_null(datas[i].brief), 30);
                     var author = replace_null(datas[i].author);
                     var goods = replace_null(datas[i].goods);
                     var follows = replace_null(datas[i].follows);
-                    var createtime = replace_null(datas[i].createtime);
+                    var createtime = replace_null(datas[i].updatetime);
                     var status = replace_null(datas[i].status);
 
                     if (status == "0") {
@@ -97,7 +97,7 @@ function init_tables(page) {
                     var c = '<tr>' +
                         '<td>' + id + '</td>' +
                         '<td>' + title + '</td>' +
-                        '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
+                        // '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
                         '<td>' + author + '</td>' +
                         '<td>' + goods + '</td>' +
                         '<td>' + follows + '</td>' +
@@ -105,8 +105,7 @@ function init_tables(page) {
                         '<td>' + status + '</td>' +
                         '<td>' +
                         '<label class="badge badge-danger" onclick="preview_experiece_details(' + id + ')"style="cursor:pointer;">预览</label>' +
-                        '<label class="badge badge-danger"style="cursor:pointer;">禁用</label>' +
-                        '<label class="badge badge-danger"style="cursor:pointer;">推荐</label></td>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="deletes(' + id + ',\'/articledelete\')">删除</label>' +
                         '</td>' +
                         '</tr>';
 

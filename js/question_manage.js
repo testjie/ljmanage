@@ -53,7 +53,7 @@ $(function() {
 
 // 首页初始化方法
 function init() {
-    var url = "../../login.html"
+    var url = "../login.html"
     var token = get_info("admin_token")
     if (token == null) {
         // 跳转到首页
@@ -84,7 +84,7 @@ function init_tables(page) {
                     var ximg = get_img_url(replace_null(datas[i].ximg));
                     var tags = replace_null(datas[i].tags);
                     var goods = replace_null(datas[i].goods);
-                    var title = replace_null(datas[i].title);
+                    var title = cutstr(replace_null(datas[i].title), 30);
                     var brief = replace_null(datas[i].brief);
                     var author = replace_null(datas[i].author);
                     var status = replace_null(datas[i].status);
@@ -102,21 +102,21 @@ function init_tables(page) {
                     }
 
                     var c = '<tr>' +
+                        '<td  style="word-wrap: break-word">' + id + '</td>' +
                         '<td class="py-1">' +
                         '<img src="' + ximg + '" alt="image" />' +
                         '</td>' +
-                        '<td width="50" style="word-wrap: break-word">' + id + '</td>' +
                         '<td>' + title + '</td>' +
-                        '<td width="150" style="word-wrap: break-word">' + brief + '</td>' +
-                        '<td width="250" style="word-wrap: break-word">' + content + '</td>' +
-                        '<td>' + uid + '</td>' +
+                        // '<td width="150" style="word-wrap: break-word">' + brief + '</td>' +
+                        // '<td width="250" style="word-wrap: break-word">' + content + '</td>' +
+                        '<td>' + author + '</td>' +
                         '<td>' + goods + '</td>' +
                         '<td>' + follows + '</td>' +
-                        '<td>' + collections + '</td>' +
+                        // '<td>' + collections + '</td>' +
                         '<td>' + updatetime + '</td>' +
                         '<td>' +
-                        '<label class="badge badge-danger">显示</label><br>' +
-                        '<label class="badge badge-danger">删除</label>' +
+                        '<label class="badge badge-danger">阅览</label><br>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="deletes(' + id + ',\'/questionsdelete\')">删除</label>' +
                         '</td>' +
                         '</tr>';
 

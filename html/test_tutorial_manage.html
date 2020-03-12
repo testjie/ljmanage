@@ -30,7 +30,8 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="输入关键字以搜索" style="width:300px;">
+                            <input type="text" class="form-control bg-transparent border-0" id="nickname_search" placeholder="输入教程标题搜索" style="width:300px;">
+                            <button class="btn btn-gradient-danger btn-lg" id="search">搜索</button>
                         </div>
                     </form>
                 </div>
@@ -304,21 +305,19 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>编号</th>
                                                 <th>标题</th>
-                                                <th>简介</th>
                                                 <th>作者</th>
-                                                <th>点赞数量</th>
+                                                <th>点赞数</th>
                                                 <th>喜欢数</th>
-                                                <th></th>
-                                                <th>状态</th>
+                                                <th>时间</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tables">
+                                        <tbody id="tables" style="TABLE-LAYOUT: fixed; ">
                                             <!-- <tr>
                                                 <td>1</td>
                                                 <td>Jacob</td>

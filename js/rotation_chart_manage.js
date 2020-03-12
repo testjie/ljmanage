@@ -54,12 +54,12 @@ function init_tables(page) {
                 var datas = str.data.coureslist;
                 for (var i = 0; i < datas.length; i++) {
                     var id = replace_null(datas[i].id);
-                    var title = cutstr(replace_null(datas[i].title), 30);
+                    var title = replace_null(datas[i].title);
                     var brief = replace_null(datas[i].brief);
                     var author = replace_null(datas[i].author);
                     var goods = replace_null(datas[i].goods);
                     var follows = replace_null(datas[i].follows);
-                    var createtime = replace_null(datas[i].updatetime);
+                    var createtime = replace_null(datas[i].createtime);
                     var status = replace_null(datas[i].status);
 
                     if (status == "1") {
@@ -68,11 +68,10 @@ function init_tables(page) {
                         status = "无效"
                     }
 
-
                     var c = '<tr>' +
-                        '<td width="5%">' + id + '</td>' +
-                        '<td width="400px;" style=" text-overflow: ellipsis; -moz-text-overflow: ellipsis; overflow: hidden;  text-align: left  ">' + title + '</td>' +
-                        // '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
+                        '<td>' + id + '</td>' +
+                        '<td width="10" style="word-wrap: break-word">' + title + '</td>' +
+                        '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
                         '<td>' + author + '</td>' +
                         '<td>' + goods + '</td>' +
                         '<td>' + follows + '</td>' +
@@ -80,7 +79,8 @@ function init_tables(page) {
                         '<td>' + status + '</td>' +
                         '<td>' +
                         '<label class="badge badge-danger"onclick="edit_course(' + id + ')" style="cursor:pointer;">编辑</label>' +
-                        '<label class="badge badge-danger" onclick="disable_course(' + id + ')" style="cursor:pointer;">删除</label>' +
+                        '<label class="badge badge-danger" onclick="disable_course(' + id + ')" style="cursor:pointer;">禁用</label>' +
+                        '<label class="badge badge-danger"onclick="recommend_course(' + id + ')" style="cursor:pointer;">推荐</label></td>' +
                         '</td>' +
                         '</tr>';
 
@@ -120,33 +120,9 @@ function compute_pagenum(id) {
 }
 
 
-// 删除教程
+// 禁用教程
 function disable_course(id) {
-    var ids = id + ',';
-    var url = get_url("/couresdelete");
-    var datas = get_json({ "dlist": ids });
-    $.ajax({
-        type: 'post',
-        url: url,
-        headers: get_headers(),
-        data: datas,
-        dataType: "json",
-        xhrFields: { withCredentials: true },
-        crossDomain: true,
-        success: function(str) { //返回json结果
-            if (str.status == 200) {
-                // 成功
-                alert("操作成功！");
-                init_tables(1);
-            } else {
-                alert(str.msg);
-            }
-        },
-        fail: function(err, status) {
-            alert(err.data);
-            console.log(err);
-        }
-    });
+    alert(id);
 }
 
 // 推荐教程
@@ -172,17 +148,16 @@ function find(key) {
         success: function(str) { //返回json结果
             if (str.status == 200) {
                 // 成功
-                // 成功
                 var tables = "";
                 var datas = str.data;
                 for (var i = 0; i < datas.length; i++) {
                     var id = replace_null(datas[i].id);
-                    var title = cutstr(replace_null(datas[i].title), 30);
+                    var title = replace_null(datas[i].title);
                     var brief = replace_null(datas[i].brief);
                     var author = replace_null(datas[i].author);
                     var goods = replace_null(datas[i].goods);
                     var follows = replace_null(datas[i].follows);
-                    var createtime = replace_null(datas[i].updatetime);
+                    var createtime = replace_null(datas[i].createtime);
                     var status = replace_null(datas[i].status);
 
                     if (status == "1") {
@@ -191,11 +166,10 @@ function find(key) {
                         status = "无效"
                     }
 
-
                     var c = '<tr>' +
-                        '<td width="5%">' + id + '</td>' +
-                        '<td width="400px;" style=" text-overflow: ellipsis; -moz-text-overflow: ellipsis; overflow: hidden;  text-align: left  ">' + title + '</td>' +
-                        // '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
+                        '<td>' + id + '</td>' +
+                        '<td width="10" style="word-wrap: break-word">' + title + '</td>' +
+                        '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
                         '<td>' + author + '</td>' +
                         '<td>' + goods + '</td>' +
                         '<td>' + follows + '</td>' +
@@ -203,7 +177,8 @@ function find(key) {
                         '<td>' + status + '</td>' +
                         '<td>' +
                         '<label class="badge badge-danger"onclick="edit_course(' + id + ')" style="cursor:pointer;">编辑</label>' +
-                        '<label class="badge badge-danger" onclick="disable_course(' + id + ')" style="cursor:pointer;">删除</label>' +
+                        '<label class="badge badge-danger" onclick="disable_course(' + id + ')" style="cursor:pointer;">禁用</label>' +
+                        '<label class="badge badge-danger"onclick="recommend_course(' + id + ')" style="cursor:pointer;">推荐</label></td>' +
                         '</td>' +
                         '</tr>';
 
