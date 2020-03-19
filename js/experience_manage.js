@@ -5,39 +5,14 @@ $(function() {
     init();
 
     // 登录请求
-    $("#adminLogin").click(function() {
-        var iurl = "/login";
-        var nurl = "index.html"
-        var username = $('#username').val();
-        var password = $('#password').val();
-        var datas = get_json({ 'username': username, 'password': password })
-        $.ajax({
-            type: 'post',
-            url: get_url(url),
-            contentType: "application/json",
-            data: datas,
-            xhrFields: { withCredentials: true },
-            crossDomain: true,
-            success: function(str) { //返回json结果
-                if (str.status == 200) {
-                    // 登录成功
-                    save_info("admin_token", str.data.token);
-                    save_info("userid", str.data.userinfo.uid);
-                    save_info("headpic", str.data.userinfo.headpic);
-                    save_info("nickname", str.data.userinfo.nickname);
-                    alert("登录成功！");
-                    go_next_page(nurl);
-                } else {
-                    alert(str.msg);
-                    logout()
+    $("#search").click(function() {
+        var nickname = $('#nickname_search').val();
+        if (nickname == '') {
+            alert("搜索的关键字不能为空!")
+            return;
+        }
+        find(nickname);
 
-                }
-            },
-            fail: function(err, status) {
-                alert(err.data);
-                console.log(err);
-            }
-        });
     });
 
 
@@ -89,9 +64,11 @@ function init_tables(page) {
                     var status = replace_null(datas[i].status);
 
                     if (status == "0") {
-                        status = "有效"
+                        status = "正常";
+                        var strstatus = "禁用"
                     } else {
-                        status = "无效"
+                        status = "禁用";
+                        var strstatus = "启用"
                     }
 
                     var c = '<tr>' +
@@ -104,7 +81,8 @@ function init_tables(page) {
                         '<td>' + createtime + '</td>' +
                         '<td>' + status + '</td>' +
                         '<td>' +
-                        '<label class="badge badge-danger" onclick="preview_experiece_details(' + id + ')"style="cursor:pointer;">预览</label>' +
+                        '<label class="badge badge-danger" onclick="preview_items(' + id + ')"style="cursor:pointer;">预览</label>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="disable_items(' + id + ')">' + strstatus + '</label>' +
                         '<label class="badge badge-danger"style="cursor:pointer;" onclick="deletes(' + id + ',\'/articledelete\')">删除</label>' +
                         '</td>' +
                         '</tr>';
@@ -118,7 +96,6 @@ function init_tables(page) {
             } else {
                 alert(str.msg);
                 logout()
-
             }
         },
         fail: function(err, status) {
@@ -129,6 +106,29 @@ function init_tables(page) {
 }
 
 
+// 禁用
+function disable_items(id) {
+    $.ajax({
+        type: 'get',
+        url: get_url("/setarticletatus?id=" + id),
+        headers: get_headers(),
+        xhrFields: { withCredentials: true },
+        crossDomain: true,
+        success: function(str) { //返回json结果
+            if (str.status == 200) {
+                // 成功
+                init_tables(1);
+            } else {
+                alert(str.msg);
+                logout()
+            }
+        },
+        fail: function(err, status) {
+            alert(err.data);
+            console.log(err);
+        }
+    });
+}
 // 计算页面
 function compute_pagenum(id) {
     var total = $('#total').text();
@@ -145,6 +145,81 @@ function compute_pagenum(id) {
     $("#next").attr("onclick", "init_tables(" + next + ")");
 }
 
-function preview_experiece_details(id) {
+function preview_items(id) {
+    alert("即将上线!");
+    return;
     go_next_page("experience_preview.html?id=" + id);
+}
+
+
+
+// 查找
+function find(key) {
+    var datas = get_json({ "search": key });
+    $.ajax({
+        type: 'post',
+        url: get_url("/usersfindarticle"),
+        headers: get_headers(),
+        data: datas,
+        xhrFields: { withCredentials: true },
+        crossDomain: true,
+        success: function(str) { //返回json结果
+            // 成功
+            if (str.status == 200) {
+                // 成功
+                var tables = "";
+                var datas = str.data;
+                for (var i = 0; i < datas.length; i++) {
+                    var id = replace_null(datas[i].id);
+                    var title = cutstr(replace_null(datas[i].title), 30);
+                    var brief = cutstr(replace_null(datas[i].brief), 30);
+                    var author = replace_null(datas[i].author);
+                    var goods = replace_null(datas[i].goods);
+                    var follows = replace_null(datas[i].follows);
+                    var createtime = replace_null(datas[i].updatetime);
+                    var status = replace_null(datas[i].status);
+
+                    if (status == "0") {
+                        status = "正常";
+                        var strstatus = "禁用"
+                    } else {
+                        status = "禁用";
+                        var strstatus = "启用"
+                    }
+
+                    var c = '<tr>' +
+                        '<td>' + id + '</td>' +
+                        '<td>' + title + '</td>' +
+                        // '<td width="400" style="word-wrap: break-word">' + brief + '</td>' +
+                        '<td>' + author + '</td>' +
+                        '<td>' + goods + '</td>' +
+                        '<td>' + follows + '</td>' +
+                        '<td>' + createtime + '</td>' +
+                        '<td>' + status + '</td>' +
+                        '<td>' +
+                        '<label class="badge badge-danger" onclick="preview_items(' + id + ')"style="cursor:pointer;">预览</label>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="disable_items(' + id + ')">' + strstatus + '</label>' +
+                        '<label class="badge badge-danger"style="cursor:pointer;" onclick="deletes(' + id + ',\'/articledelete\')">删除</label>' +
+                        '</td>' +
+                        '</tr>';
+
+                    tables = tables + c;
+                }
+                $('#tables').html(tables); // table表格
+                $('#total').text(str.data.length); // 总条数
+                $("#pre").hide();
+                $("#next").hide();
+                compute_pagenum(page); //计算分页
+
+            } else {
+                alert(str.msg);
+                logout()
+            }
+
+        },
+        fail: function(err, status) {
+            alert(err.data);
+            console.log(err);
+        }
+    });
 }

@@ -31,7 +31,8 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="输入关键字以搜索" style="width:300px;">
+                            <input type="text" class="form-control bg-transparent border-0" id="nickname_search" placeholder="请输入账号或者昵称搜索" style="width:300px;">
+                            <button class="btn btn-gradient-danger btn-lg" id="search">搜索</button>
                         </div>
                     </form>
                 </div>
@@ -226,7 +227,7 @@
                         <div class="collapse" id="lbtlist" style="">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="rotation_chart_manage.html">轮播图管理</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="test_tutorial_new.html">新增轮播图</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="rotation_chart_manage_new.html">新增轮播图</a></li>
                             </ul>
                         </div>
                     </li>
@@ -286,6 +287,20 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link collapsed" data-toggle="collapse" href="#bqlist" aria-expanded="false" aria-controls="ui-basic">
+                            <span class="menu-title">标签管理</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-comment-question-outline menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="bqlist" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="tags_manage.html">标签列表</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link" href="../../ui-features/typography.html">xxxx管理</a></li> -->
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link collapsed" data-toggle="collapse" href="#tklist" aria-expanded="false" aria-controls="ui-basic">
                             <span class="menu-title">题库管理</span>
                             <i class="menu-arrow"></i>
@@ -325,7 +340,7 @@
                                         <thead>
                                             <tr>
                                                 <th>编号</th>
-                                                <th>图片</th>
+                                                <!-- <th>图片</th> -->
                                                 <th>标题</th>
                                                 <!-- <th>简介</th>
                                                 <th>内容</th> -->
@@ -334,6 +349,7 @@
                                                 <th>喜欢数</th>
                                                 <!-- <th>收藏数量</th> -->
                                                 <th>修改时间</th>
+                                                <th>状态</th>
                                                 <!-- <th>修改时间</th> -->
                                                 <th>操作</th>
                                             </tr>

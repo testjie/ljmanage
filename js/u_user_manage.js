@@ -164,7 +164,7 @@ function freeze_user(id) {
 
 // 查找用户
 function find_user(key) {
-    var datas = get_json({ "username": key });
+    var datas = get_json({ "search": key });
     $.ajax({
         type: 'post',
         url: get_url("/usersfind"),
